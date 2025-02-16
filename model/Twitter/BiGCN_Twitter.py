@@ -112,8 +112,8 @@ def train_GCN(treeDic, x_test, x_train,TDdroprate,BUdroprate,lr, weight_decay,pa
     early_stopping = EarlyStopping(patience=patience, verbose=True)
     for epoch in range(n_epochs):
         traindata_list, testdata_list = loadBiData(dataname, treeDic, x_train, x_test, TDdroprate,BUdroprate)
-        train_loader = DataLoader(traindata_list, batch_size=batchsize, shuffle=True, num_workers=5)
-        test_loader = DataLoader(testdata_list, batch_size=batchsize, shuffle=True, num_workers=5)
+        train_loader = DataLoader(traindata_list, batch_size=batchsize, shuffle=True, num_workers=0)
+        test_loader = DataLoader(testdata_list, batch_size=batchsize, shuffle=True, num_workers=0)
         avg_loss = []
         avg_acc = []
         batch_idx = 0

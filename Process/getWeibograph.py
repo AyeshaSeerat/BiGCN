@@ -76,7 +76,7 @@ def getfeature(x_word,x_index):
 
 
 def main():
-    treePath = os.path.join(cwd, 'data/Weibo/weibotree.txt')
+    treePath = os.path.join(cwd, 'data\Weibo\weibotree.txt')
     print("reading Weibo tree")
     treeDic = {}
     for line in open(treePath):
@@ -87,7 +87,7 @@ def main():
         treeDic[eid][indexC] = {'parent': indexP, 'vec': Vec}
     print('tree no:', len(treeDic))
 
-    labelPath = os.path.join(cwd, "data/Weibo/weibo_id_label.txt")
+    labelPath = os.path.join(cwd, "data\Weibo\weibo_id_label.txt")
     print("loading weibo label:")
     event,y= [],[]
     l1 = l2 = 0
@@ -116,7 +116,7 @@ def main():
             x_x = getfeature(x_word, x_index)
             rootfeat, tree, x_x, rootindex, y = np.array(rootfeat), np.array(tree), np.array(x_x), np.array(
                 rootindex), np.array(y)
-            np.savez(os.path.join(cwd,'data/Weibograph/'+id+'.npz'), x=x_x,root=rootfeat,edgeindex=tree,rootindex=rootindex,y=y)
+            np.savez(os.path.join(cwd,'gen/Weibo/'+id+'.npz'), x=x_x,root=rootfeat,edgeindex=tree,rootindex=rootindex,y=y)
             return None
         x_word, x_index, tree, rootfeat, rootindex = constructMat(event)
         x_x = getfeature(x_word, x_index)

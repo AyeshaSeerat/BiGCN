@@ -120,10 +120,16 @@ def main(obj):
         if len(event)>1:
             x_word, x_index, tree, rootfeat, rootindex = constructMat(event)
             x_x = getfeature(x_word, x_index)
-            rootfeat, tree, x_x, rootindex, y = np.array(rootfeat), np.array(tree), np.array(x_x), np.array(
-                rootindex), np.array(y)
-            np.savez( os.path.join(cwd, 'data/'+obj+'graph/'+id+'.npz'), x=x_x,root=rootfeat,edgeindex=tree,rootindex=rootindex,y=y)
-            return None
+            # Debugging feature and edge index output
+            print(f"Event {id}: Feature Shape: {x_x.shape}, Edge Index Shape: {len(tree[0])}")
+
+            # Create the directory if it doesn't exist
+            save_dir = os.path.join(cwd, 'gen', obj + 'graph15')
+            os.makedirs(save_dir, exist_ok=True)
+
+            rootfeat, tree, x_x, rootindex, y = np.array(rootfeat), np.array(tree), np.array(x_x), np.array(rootindex), np.array(y)
+            np.savez(os.path.join(save_dir, id + '.npz'), x=x_x, root=rootfeat, edgeindex=tree, rootindex=rootindex, y=y)
+
     print("loading dataset", )
     Parallel(n_jobs=30, backend='threading')(delayed(loadEid)(treeDic[eid] if eid in treeDic else None,eid,labelDic[eid]) for eid in tqdm(event))
     return
